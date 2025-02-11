@@ -40,9 +40,10 @@ export default function Home() {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-center bg-black">
-      <h1 className="text-2xl font-bold">Boxing Interval Timer</h1>
       <div className="text-xl mt-4">Round: {round}</div>
-      <div className="text-4xl font-mono mt-2">{formatTime(time)}</div>
+      <div className="text-4xl font-mono my-5 h-40">
+        <p className="time">{formatTime(time)}</p>
+      </div>
       <div className="mt-4 space-x-2">
         <button
           className="px-4 py-2 bg-green-500 text-white rounded"

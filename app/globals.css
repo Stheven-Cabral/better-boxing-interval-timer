@@ -19,3 +19,8 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.time {
+  font-family: var(--font-secondary);
+  font-size: 100px;
+}
