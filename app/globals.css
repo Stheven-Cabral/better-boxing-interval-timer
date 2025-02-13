@@ -5,6 +5,8 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --color-neon-green: #00ff00;
+  --color-neon-red: #ff0000;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -20,7 +22,31 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+.timer {
+  display: flex;
+  flex-direction: row;
+  height: fit-content;
+  width: 75vw;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.round,
 .time {
   font-family: var(--font-secondary);
   font-size: 100px;
+
+  @media (min-width: 768px) {
+    font-size: 200px;
+  }
+}
+
+.round {
+  color: var(--color-neon-green);
+}
+
+.separator {
+  font-size: 100px;
+  font-family: var(--font-secondary);
+  color: var(--color-neon-red);
 }

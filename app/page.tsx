@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import styles from "./page.module.css";
 
 export default function Home() {
   const [time, setTime] = useState(0);
@@ -40,9 +41,10 @@ export default function Home() {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-center bg-black">
-      <div className="text-xl mt-4">Round: {round}</div>
-      <div className="text-4xl font-mono my-5 h-40">
-        <p className="time">{formatTime(time)}</p>
+      <div className="timer">
+        <div className="round">{round}</div>
+        <div className="separator">-</div>
+        <div className="time">{formatTime(time)}</div>
       </div>
       <div className="mt-4 space-x-2">
         <button
