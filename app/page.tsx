@@ -2,19 +2,39 @@
 
 import { useState, useEffect } from "react";
 import styles from "./page.module.css";
+import { useWindowSize } from "react-use";
 
 export default function Home() {
   const [time, setTime] = useState(0);
   const [round, setRound] = useState(1);
   const [isRunning, setIsRunning] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  //Effect for handling window size
+
+  const handleResize = () => {
+    setIsDesktop(window.innerWidth >= 1280);
+  };
 
   useEffect(() => {
+    window.addEventListener("resize", handleResize);
+    handleResize();
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  // Effect for handling time
+  useEffect(() => {
     let timer: NodeJS.Timeout | null = null;
+
     if (isRunning) {
       timer = setInterval(() => {
         setTime((prevTime) => prevTime + 1);
       }, 1000);
     }
+
     return () => {
       if (timer) {
         clearInterval(timer);
@@ -40,13 +60,13 @@ export default function Home() {
   };
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center bg-black">
+    <main className="device">
       <div className="timer">
         <div className="round">{round}</div>
-        <div className="separator">-</div>
+        {isDesktop && <div className="separator">-</div>}
         <div className="time">{formatTime(time)}</div>
       </div>
-      <div className="mt-4 space-x-2">
+      <div className="controls">
         <button
           className="px-4 py-2 bg-green-500 text-white rounded"
           onClick={startTimer}

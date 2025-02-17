@@ -3,32 +3,39 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
+  --color-white: #ffffff;
   --foreground: #171717;
   --color-neon-green: #00ff00;
   --color-neon-red: #ff0000;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+body {
+  background-color: black;
+  font-family: var(--font-primary);
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+.device {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+  padding-left: 16px;
+  padding-right: 16px;
 }
 
 .timer {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   height: fit-content;
   width: 75vw;
   justify-content: space-around;
   align-items: center;
+
+  @media screen and (min-width: 1280px) {
+    flex-direction: row;
+  }
 }
 
 .round,
@@ -37,6 +44,10 @@ body {
   font-size: 100px;
 
   @media (min-width: 768px) {
+    font-size: 125px;
+  }
+
+  @media (min-width: 1280px) {
     font-size: 200px;
   }
 }
@@ -49,4 +60,39 @@ body {
   font-size: 100px;
   font-family: var(--font-secondary);
   color: var(--color-neon-red);
+}
+
+.time {
+  color: var(--color-white);
+}
+
+.controls {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 768px;
+
+  & button {
+    margin-top: 16px;
+    height: 50px;
+    text-transform: uppercase;
+    font-size: 24px;
+    font-weight: 500;
+
+    @media screen and (min-width: 768px) {
+      height: 75px;
+      font-size: 32px;
+    }
+
+    @media screen and (min-width: 1280px) {
+      font-size: 28px;
+      min-width: 186px;
+    }
+  }
+
+  @media screen and (min-width: 1280px) {
+    flex-direction: row;
+    justify-content: space-between;
+  }
 }
