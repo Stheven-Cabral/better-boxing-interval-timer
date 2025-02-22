@@ -14,6 +14,10 @@ body {
   font-family: var(--font-primary);
 }
 
+main {
+  position: relative;
+}
+
 .device {
   display: flex;
   min-height: 100vh;
@@ -86,8 +90,8 @@ body {
     }
 
     @media screen and (min-width: 1280px) {
-      font-size: 28px;
-      min-width: 186px;
+      font-size: 24px;
+      min-width: 185px;
     }
   }
 
@@ -95,4 +99,23 @@ body {
     flex-direction: row;
     justify-content: space-between;
   }
+}
+
+.modal {
+  display: none;
+  position: absolute;
+  z-index: 1;
+  background-color: white;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50%;
+  height: 75%;
+}
+
+.modal-close {
+  cursor: pointer;
+  width: 25px;
+  height: 25px;
+  font-size: 30px;
 }
