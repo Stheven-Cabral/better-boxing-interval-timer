@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import SettingsModal from "@/components/SettingsModal";
+import Settings from "@/components/Settings";
 import styles from "./page.module.css";
 
 export default function Home() {
@@ -9,6 +9,7 @@ export default function Home() {
   const [round, setRound] = useState(1);
   const [isRunning, setIsRunning] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
+  const [settingsOpen, setSettingsOpen] = useState(false);
 
   //Effect for handling window size
 
@@ -87,19 +88,17 @@ export default function Home() {
             Reset Time
           </button>
           <button
-            className="px-4 py-2 bg-blue-500 text-white rounded"
-            onClick={() => {
-              const modal = document.getElementById("modal");
-              if (modal) {
-                modal.style.display = "block";
-              }
-            }}
+            className="settings-open-button px-4 py-2 bg-blue-500 text-white rounded"
+            onClick={() => setSettingsOpen(!settingsOpen)}
           >
             Settings
           </button>
         </div>
       </div>
-      <SettingsModal />
+      <Settings
+        className={settingsOpen ? "open" : ""}
+        setSettingsOpen={setSettingsOpen}
+      />
     </main>
   );
 }

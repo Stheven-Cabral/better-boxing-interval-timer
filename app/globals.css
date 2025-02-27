@@ -4,13 +4,13 @@
 
 :root {
   --color-white: #ffffff;
-  --foreground: #171717;
+  --color-black: #171717;
   --color-neon-green: #00ff00;
   --color-neon-red: #ff0000;
 }
 
 body {
-  background-color: black;
+  background-color: var(--color-black);
   font-family: var(--font-primary);
 }
 
@@ -24,7 +24,7 @@ main {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: black;
+  background-color: var(--color-black);
   padding-left: 16px;
   padding-right: 16px;
 }
@@ -34,7 +34,7 @@ main {
   flex-direction: column;
   height: fit-content;
   width: 75vw;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
 
   @media screen and (min-width: 1280px) {
@@ -101,34 +101,39 @@ main {
   }
 }
 
-.modal {
-  display: none;
+.settings {
   position: absolute;
   z-index: 1;
-  background-color: white;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 50%;
-  height: 75%;
-  border-radius: 16px;
+  background-color: var(--color-black);
+  left: -100%;
+  top: 0;
+  width: 100%;
+  max-width: 600px;
+  height: 100vh;
+  border-radius: 8px;
+  border: 1px solid var(--color-white);
+  transition: left 0.5s ease-in-out;
 
-  .modal-close {
+  &.open {
+    left: 0;
+  }
+
+  .settings-close-button {
     cursor: pointer;
     width: 25px;
     height: 25px;
     font-size: 30px;
   }
 
-  .modal-input-container {
+  .settings-input-container {
     margin: 16px 0 0;
   }
 
-  .modal-input {
-    border: 1px solid black;
+  .settings-input {
+    border: 1px solid var(--color-black);
   }
 
-  .modal-input-colon {
+  .settings-input-colon {
     margin: 0 5px;
   }
 }
