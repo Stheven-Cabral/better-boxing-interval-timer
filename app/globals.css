@@ -5,6 +5,7 @@
 :root {
   --color-white: #ffffff;
   --color-black: #171717;
+  --color-blue: #3246c5;
   --color-neon-green: #00ff00;
   --color-neon-red: #ff0000;
 }
@@ -113,6 +114,7 @@ main {
   border-radius: 8px;
   border: 1px solid var(--color-white);
   transition: left 0.5s ease-in-out;
+  padding: 0 8px;
 
   &.open {
     left: 0;
@@ -123,10 +125,16 @@ main {
     width: 25px;
     height: 25px;
     font-size: 30px;
+    color: var(--color-white);
   }
 
   .settings-input-container {
-    margin: 16px 0 0;
+    margin: 32px 0 0;
+  }
+
+  .rounds-input-group,
+  .time-input-group {
+    margin: 8px 0 0;
   }
 
   .settings-input {
@@ -135,5 +143,26 @@ main {
 
   .settings-input-colon {
     margin: 0 5px;
+    color: var(--color-white);
+  }
+
+  label {
+    color: var(--color-white);
+    font-family: var(--font-primary);
+    font-size: 20px;
+  }
+
+  .settings-button-container {
+    margin: 32px 0 0;
+  }
+
+  .settings-button {
+    background-color: var(--color-blue);
+    color: var(--color-white);
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    min-width: 150px;
+    text-transform: uppercase;
   }
 }

@@ -27,17 +27,19 @@ export const Settings = ({
   return (
     <div id="settings" className={`settings ${className}`}>
       <div
-        className="settings-close-button"
+        className="settings-close-button-container"
         onClick={() => setSettingsOpen(false)}
       >
-        x
+        <button className="settings-close-button">x</button>
       </div>
       <div className="settings-inputs">
         <div className="settings-input-container">
           <label className="settings-input-label" htmlFor="rounds">
             Rounds:
           </label>
-          <input className="settings-input" type="number" id="rounds" />
+          <div className="rounds-input-group">
+            <input className="settings-input" type="number" id="rounds" />
+          </div>
         </div>
 
         <div className="settings-input-container">
