@@ -16,6 +16,28 @@ export const Settings = ({
     }
   };
 
+  const setSettingsValues = () => {
+    const roundsInput = document.getElementById("rounds") as HTMLInputElement;
+    const roundMinutesInput = document.getElementById(
+      "time-per-round-minutes"
+    ) as HTMLInputElement;
+    const roundSecondsInput = document.getElementById(
+      "time-per-round-seconds"
+    ) as HTMLInputElement;
+    const breakMinutesInput = document.getElementById(
+      "time-per-round-seconds"
+    ) as HTMLInputElement;
+    const breakSecondsInput = document.getElementById(
+      "time-per-round-seconds"
+    ) as HTMLInputElement;
+
+    console.log(roundsInput.value);
+    console.log(roundMinutesInput.value);
+    console.log(roundSecondsInput.value);
+    console.log(breakMinutesInput.value);
+    console.log(breakSecondsInput.value);
+  };
+
   useEffect(() => {
     window.addEventListener("click", handleSettingsOutsideClick);
 
@@ -38,7 +60,11 @@ export const Settings = ({
             Rounds:
           </label>
           <div className="rounds-input-group">
-            <input className="settings-input" type="number" id="rounds" />
+            <input
+              className="settings-input rounds-input"
+              type="number"
+              id="rounds"
+            />
           </div>
         </div>
 
@@ -96,7 +122,11 @@ export const Settings = ({
         </div>
       </div>
       <div className="settings-button-container">
-        <button className="settings-button" type="submit">
+        <button
+          onClick={() => setSettingsValues()}
+          className="settings-button bg-blue-500"
+          type="submit"
+        >
           Save
         </button>
       </div>

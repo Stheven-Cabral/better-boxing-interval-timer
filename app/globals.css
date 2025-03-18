@@ -44,7 +44,8 @@ main {
 }
 
 .round,
-.time {
+.round-time,
+.break-time {
   font-family: var(--font-secondary);
   font-size: 100px;
 
@@ -67,7 +68,8 @@ main {
   color: var(--color-neon-red);
 }
 
-.time {
+.round-time,
+.break-time {
   color: var(--color-white);
 }
 
@@ -80,10 +82,13 @@ main {
 
   & button {
     margin-top: 16px;
+    padding: 8px 16px;
     height: 50px;
     text-transform: uppercase;
     font-size: 24px;
     font-weight: 500;
+    color: var(--color-white);
+    border-radius: 4px;
 
     @media screen and (min-width: 768px) {
       height: 75px;
@@ -114,7 +119,7 @@ main {
   border-radius: 8px;
   border: 1px solid var(--color-white);
   transition: left 0.5s ease-in-out;
-  padding: 0 8px;
+  padding: 8px 12px;
 
   &.open {
     left: 0;
@@ -138,7 +143,16 @@ main {
   }
 
   .settings-input {
+    box-sizing: border-box;
+    height: 60px;
+    width: 60px;
     border: 1px solid var(--color-black);
+    text-align: center;
+    font-size: 26px;
+
+    &.rounds-input {
+      width: 100px;
+    }
   }
 
   .settings-input-colon {
@@ -149,7 +163,12 @@ main {
   label {
     color: var(--color-white);
     font-family: var(--font-primary);
-    font-size: 20px;
+    font-size: 24px;
+    text-transform: uppercase;
+
+    @media screen and (min-width: 768px) {
+      font-size: 32px;
+    }
   }
 
   .settings-button-container {
@@ -157,12 +176,15 @@ main {
   }
 
   .settings-button {
-    background-color: var(--color-blue);
     color: var(--color-white);
+    height: 60px;
+    margin-top: 16px;
     padding: 8px 16px;
-    border-radius: 8px;
+    border-radius: 4px;
     cursor: pointer;
     min-width: 150px;
     text-transform: uppercase;
+    font-weight: 500;
+    font-size: 22px;
   }
 }
