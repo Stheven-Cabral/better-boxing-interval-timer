@@ -14,6 +14,8 @@ export default function Home() {
   const [isBreakRunning, setIsBreakRunning] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState(false);
+  const [roundIntervalId, setRoundIntervalId] = useState<number | null>(null);
+  const [breakIntervalId, setBreakIntervalId] = useState<number | null>(null);
 
   const handleResize = () => {
     setIsDesktop(window.innerWidth >= 1280);
@@ -34,8 +36,69 @@ export default function Home() {
     return `${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
   };
 
-  const startTimer = () => setIsRoundRunning(true);
-  const pauseTimer = () => setIsRoundRunning(false);
+  const startRoundTimer = () => {
+    setIsRoundRunning(true);
+    const intervalTimer = setInterval(() => {
+      setRoundSeconds((prevSeconds) => {
+        if (prevSeconds === 0) {
+          setRoundMinutes((prevMinutes) => {
+            if (prevMinutes === 0) {
+              // Timer finished
+              setIsRoundRunning(false);
+              setIsBreakRunning(true);
+              startBreakTimer();
+              clearInterval(roundIntervalId as number);
+              return 0;
+            } else {
+              return prevMinutes - 1;
+            }
+          });
+          return 59;
+        } else {
+          return prevSeconds - 1;
+        }
+      });
+    }, 1000);
+    setRoundIntervalId(intervalTimer as unknown as number);
+  };
+
+  const startBreakTimer = () => {
+    setIsBreakRunning(true);
+    const intervalTimer = setInterval(() => {
+      setBreakSeconds((prevSeconds) => {
+        if (prevSeconds === 0) {
+          setBreakMinutes((prevMinutes) => {
+            if (prevMinutes === 0) {
+              // Timer finished
+              setIsBreakRunning(false);
+              setIsRoundRunning(true);
+              clearInterval(breakIntervalId as number);
+              return 0;
+            } else {
+              return prevMinutes - 1;
+            }
+          });
+          return 59;
+        } else {
+          return prevSeconds - 1;
+        }
+      });
+    }, 1000);
+    setBreakIntervalId(intervalTimer as unknown as number);
+  };
+
+  const pauseRoundTimer = () => {
+    setIsRoundRunning(false);
+    clearInterval(roundIntervalId as number);
+    console.log("Started interval with ID:", roundIntervalId);
+  };
+
+  const pauseBreakTimer = () => {
+    setIsBreakRunning(false);
+    clearInterval(breakIntervalId as number);
+    console.log("Started interval with ID:", breakIntervalId);
+  };
+
   const resetTimer = () => {
     setRoundMinutes(0);
     setRoundSeconds(0);
@@ -51,7 +114,8 @@ export default function Home() {
         <div className="timer">
           <div className="round">{rounds}</div>
           {isDesktop && <div className="separator">-</div>}
-          {!isBreakRunning ? (
+          {(!isRoundRunning && !isBreakRunning) ||
+          (isRoundRunning && !isBreakRunning) ? (
             <div className="round-time">
               {formatRoundTime(roundMinutes, roundSeconds)}
             </div>
@@ -62,13 +126,30 @@ export default function Home() {
           )}
         </div>
         <div className="controls">
-          <button className="bg-green-500 rounded" onClick={startTimer}>
+          <button
+            className="bg-green-500 rounded timer-start-button"
+            onClick={
+              isRoundRunning && !isBreakRunning
+                ? startRoundTimer
+                : startBreakTimer
+            }
+          >
             Start
           </button>
-          <button className="bg-yellow-500 rounded" onClick={pauseTimer}>
+          <button
+            className="bg-yellow-500 rounded timer-pause-button"
+            onClick={
+              isRoundRunning && !isBreakRunning
+                ? pauseRoundTimer
+                : pauseBreakTimer
+            }
+          >
             Pause
           </button>
-          <button className="bg-red-500 rounded" onClick={resetTimer}>
+          <button
+            className="bg-red-500 rounded timer-reset-button"
+            onClick={resetTimer}
+          >
             Reset Time
           </button>
           <button
@@ -82,6 +163,10 @@ export default function Home() {
       <Settings
         className={settingsOpen ? "open" : ""}
         setSettingsOpen={setSettingsOpen}
+        setRoundMinutes={setRoundMinutes}
+        setRoundSeconds={setRoundSeconds}
+        setBreakMinutes={setBreakMinutes}
+        setBreakSeconds={setBreakSeconds}
       />
     </main>
   );

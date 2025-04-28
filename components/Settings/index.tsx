@@ -3,9 +3,17 @@ import { useEffect, useState } from "react";
 export const Settings = ({
   className,
   setSettingsOpen,
+  setRoundMinutes,
+  setRoundSeconds,
+  setBreakMinutes,
+  setBreakSeconds,
 }: {
   className?: string;
   setSettingsOpen: (open: boolean) => void;
+  setRoundMinutes: (minutes: number) => void;
+  setRoundSeconds: (seconds: number) => void;
+  setBreakMinutes: (minutes: number) => void;
+  setBreakSeconds: (seconds: number) => void;
 }) => {
   const handleSettingsOutsideClick = (event: MouseEvent) => {
     if (
@@ -69,10 +77,10 @@ export const Settings = ({
       "time-per-round-seconds"
     ) as HTMLInputElement;
     const breakMinutesInput = document.getElementById(
-      "time-per-round-minutes"
+      "time-per-break-minutes"
     ) as HTMLInputElement;
     const breakSecondsInput = document.getElementById(
-      "time-per-round-seconds"
+      "time-per-break-seconds"
     ) as HTMLInputElement;
 
     if (
@@ -99,6 +107,11 @@ export const Settings = ({
       )
     ) {
       return;
+    } else {
+      setRoundMinutes(parseInt(roundMinutesInput.value, 10));
+      setRoundSeconds(parseInt(roundSecondsInput.value, 10));
+      setBreakMinutes(parseInt(breakMinutesInput.value, 10));
+      setBreakSeconds(parseInt(breakSecondsInput.value, 10));
     }
   };
 
